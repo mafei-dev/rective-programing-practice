@@ -9,7 +9,14 @@ public class MonoSubscribeTest {
 
     public static void main(String[] args) {
 
-        Mono<String> mono = Mono.just("hi i am mafei");
+        Mono<String> mono = Mono
+                .just("hi i am mafei")
+                .map(s -> {
+                    return s + ", from Sri Lanka.";
+                })
+                .map(s -> {
+                    throw new RuntimeException("There is an error!");
+                });
 
         mono.subscribe(
                 //on next
@@ -18,7 +25,7 @@ public class MonoSubscribeTest {
                 },
                 //onError
                 throwable -> {
-                    System.err.println("throwable = " + throwable);
+                    System.err.println("Error = " + throwable.getMessage());
                 },
                 //conComplete
                 () -> {
