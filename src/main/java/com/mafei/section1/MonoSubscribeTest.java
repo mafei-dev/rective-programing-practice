@@ -1,5 +1,6 @@
 package com.mafei.section1;
 
+import com.mafei.utils.SubscriberUtil;
 import reactor.core.publisher.Mono;
 
 /*
@@ -19,18 +20,9 @@ public class MonoSubscribeTest {
                 });
 
         mono.subscribe(
-                //on next
-                msg -> {
-                    System.out.println("msg = " + msg);
-                },
-                //onError
-                throwable -> {
-                    System.err.println("Error = " + throwable.getMessage());
-                },
-                //conComplete
-                () -> {
-                    System.out.println("complete.");
-                }
+                SubscriberUtil.onNext(),
+                SubscriberUtil.onError(),
+                SubscriberUtil.onComplete()
         );
 
     }
