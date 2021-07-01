@@ -8,19 +8,23 @@ import reactor.core.publisher.Flux;
 */
 public class L02FluxMultipleSubscribers {
     public static void main(String[] args) {
-        Flux<Integer> flux = Flux.just(1, 2, 3, 5);
-        flux.subscribe(
+        Flux<Object> flux = Flux.just(1, 2, 3, 5, "mafei");
+
+        //this subscriber interesting only for String.
+        flux.filter(o -> o instanceof String)
+                .subscribe(
+                        o -> {
+                            System.out.println("Name is = " + o);
+                        },
+                        SubscriberUtil.onError(),
+                        () -> System.out.println("name subscriber completed.")
+                );
+
+        //this subscriber interesting only for numbers [Integer].
+        flux.filter(o -> o instanceof Integer).subscribe(
                 SubscriberUtil.onNext(),
                 SubscriberUtil.onError(),
-                () -> System.out.println("subscribe one completed.")
+                () -> System.out.println("number subscribe completed.")
         );
-
-        flux.subscribe(
-                SubscriberUtil.onNext(),
-                SubscriberUtil.onError(),
-                () -> System.out.println("subscribe two completed.")
-        );
-
-
     }
 }
