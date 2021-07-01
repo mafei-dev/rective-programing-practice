@@ -11,13 +11,13 @@ public class MonoSubscribeTest {
     public static void main(String[] args) {
 
         Mono<String> mono = Mono
-                .just("hi i am mafei")
+                .just("Hi, i am " + SubscriberUtil.FAKER.name().fullName())
                 .map(s -> {
                     return s + ", from Sri Lanka.";
                 })
-                .map(s -> {
+                /*.map(s -> {
                     throw new RuntimeException("There is an error!");
-                });
+                })*/;
 
         mono.subscribe(
                 SubscriberUtil.onNext(),
