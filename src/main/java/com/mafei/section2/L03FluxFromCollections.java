@@ -23,5 +23,10 @@ public class L03FluxFromCollections {
                 SubscriberUtil.onNext()
         );
 
+        Integer[] data = {1, 2};
+        Flux.fromArray(data).subscribe(
+                SubscriberUtil.onNext()
+        );
+
     }
 }
