@@ -23,4 +23,11 @@ public class SubscriberUtil {
         return () -> System.out.println("completed.");
     }
 
+    public static void seep(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
