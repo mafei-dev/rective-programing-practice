@@ -19,7 +19,7 @@ public class L04FluxFromStream {
         //stream can't be use multiple times
         //integerStream.forEach(System.out::println);
 
-        Flux<Integer> integerFlux = Flux.fromStream(integerStream);
+        Flux<Integer> integerFlux = Flux.fromStream(() -> integerList.stream());
 
         //subscriber 1
         //use the stream successfully
