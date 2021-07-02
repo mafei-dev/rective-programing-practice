@@ -14,5 +14,22 @@ public class FluxFromMono {
             System.out.println("name = " + _name);
         });
 
+
+        //this is how get mono get from flux
+        Flux.range(1, 20)
+                .next()
+                .subscribe(integer -> {
+                    System.out.println("integer = " + integer);
+                });
+
+        //with filters
+        Flux.range(1, 20)
+                .filter(integer -> integer > 5)
+                .next()
+                .subscribe(integer -> {
+                    System.out.println("integer = " + integer);
+                });
+
+
     }
 }
