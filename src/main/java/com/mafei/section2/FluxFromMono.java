@@ -30,6 +30,14 @@ public class FluxFromMono {
                     System.out.println("integer = " + integer);
                 });
 
+        //with filters
+        Flux.range(1, 20)
+                .next()
+                .filter(integer -> integer > 5)
+                .subscribe(integer -> {
+                    System.out.println("integer = " + integer);
+                });
+
 
     }
 }
