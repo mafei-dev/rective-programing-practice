@@ -66,6 +66,9 @@ public class L2Callbacks {
                 .doOnError(throwable -> {
                     System.out.println("1-throwable = " + throwable);
                 })
+                .doOnCancel(() -> {
+                    System.out.println("1-doOnCancel");
+                })
                 .subscribe(o -> {
                     System.out.println("1-o = " + o);
                 });
@@ -82,6 +85,9 @@ public class L2Callbacks {
                 .doOnNext(o -> {
                     System.out.println("2-doOnNext-1:o = " + o);
                 })
+                .doOnCancel(() -> {
+                    System.out.println("2-doOnCancel");
+                })
                 .doOnTerminate(() -> {
                     System.out.println("2-doOnTerminate");
                 })
@@ -92,6 +98,7 @@ public class L2Callbacks {
                 .doOnSubscribe(subscription -> {
                     System.out.println("2-doOnSubscribe:subscription " + subscription);
                 })
+                .take(2)
                 .subscribe(o -> {
                     System.out.println("2-o = " + o);
                 });
