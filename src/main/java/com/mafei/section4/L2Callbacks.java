@@ -69,6 +69,10 @@ public class L2Callbacks {
                 .doOnCancel(() -> {
                     System.out.println("1-doOnCancel");
                 })
+                .doFinally(signalType -> {
+
+                    System.out.println("1-doFinally:signalType " + signalType);
+                })
                 .subscribe(o -> {
                     System.out.println("1-o = " + o);
                 });
@@ -97,6 +101,9 @@ public class L2Callbacks {
 
                 .doOnSubscribe(subscription -> {
                     System.out.println("2-doOnSubscribe:subscription " + subscription);
+                })
+                .doFinally(signalType -> {
+                    System.out.println("2-doFinally:signalType " + signalType);
                 })
                 .take(2)
                 .subscribe(o -> {
