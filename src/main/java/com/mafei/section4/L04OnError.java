@@ -14,7 +14,9 @@ public class L04OnError {
         System.out.println("Main Thread > " + Thread.currentThread().getName());
         Flux.range(1, 10)
                 .map(integer -> 10 / (5 - integer))
-                .onErrorResume(throwable -> fallback())
+                .onErrorContinue((throwable, o) -> {
+
+                })
                 .subscribe(integer -> {
                     System.out.println("Thread > " + Thread.currentThread().getName());
                     System.out.println("integer = " + integer);
