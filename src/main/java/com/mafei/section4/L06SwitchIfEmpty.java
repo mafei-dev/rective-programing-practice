@@ -35,6 +35,11 @@ public class L06SwitchIfEmpty {
                 });
 
 
+        /*As an example, think that you have redis cache,
+        but when you call them, there is no cache data
+        then you can call the database,
+        like this kind of cases we can use this.
+         */
     }
 
     public static Flux<Integer> getOrderNums() {
