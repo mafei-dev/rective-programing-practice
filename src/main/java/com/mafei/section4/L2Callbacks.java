@@ -50,7 +50,6 @@ public class L2Callbacks {
                 .doFirst(() -> {
                     System.out.println("1-doFirst");
                 })
-
                 .doOnComplete(() -> {
                     System.out.println("1-doOnComplete");
                 })
@@ -70,7 +69,6 @@ public class L2Callbacks {
                     System.out.println("1-doOnCancel");
                 })
                 .doFinally(signalType -> {
-
                     System.out.println("1-doFinally:signalType " + signalType);
                 })
                 .subscribe(o -> {
@@ -98,7 +96,6 @@ public class L2Callbacks {
                 .doOnError(throwable -> {
                     System.out.println("2-throwable = " + throwable);
                 })
-
                 .doOnSubscribe(subscription -> {
                     System.out.println("2-doOnSubscribe:subscription " + subscription);
                 })
