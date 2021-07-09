@@ -1,6 +1,5 @@
 package com.mafei.section4;
 
-import com.mafei.utils.SubscriberUtil;
 import reactor.core.publisher.Flux;
 
 import java.util.function.Function;
@@ -8,53 +7,22 @@ import java.util.function.Function;
 /*
   @Author mafei
 */
-
-class Person {
-    private String name;
-    private int age;
-
-    public Person() {
-        this.name = SubscriberUtil.FAKER.name().firstName();
-        this.age = SubscriberUtil.FAKER.random().nextInt(1, 30);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
-    }
-}
-
-public class L07Transform {
-
-
+public class L08SwitchOnFirst {
     public static void main(String[] args) {
 
         getPerson()
-                .transform(applyFilter())
+                .switchOnFirst((signal, personFlux) -> {
+                    System.out.println("inside of the switch on.");
+                    //if the first age is less than 10, the filler will be applied.
+                    if (signal.isOnNext() && signal.get().getAge() > 10) {
+                        return personFlux;
+                    } else {
+                        return applyFilter().apply(personFlux);
+                    }
+                })
                 .subscribe(person -> {
                     System.out.println("person = " + person);
                 });
-
-
     }
 
     public static Flux<Person> getPerson() {
@@ -63,6 +31,7 @@ public class L07Transform {
     }
 
     public static Function<Flux<Person>, Flux<Person>> applyFilter() {
+        System.out.println("Entered filter.");
         return personFlux -> personFlux
                 .filter(person -> person.getAge() > 10)
                 .doOnNext(person ->
