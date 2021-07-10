@@ -17,7 +17,8 @@ public class L03HotPublishRefCount {
                 .delayElements(Duration.ofSeconds(2))
                 //share = publish().refCount(1)
                 //this means, at least should have one subscriber
-                .publish().refCount(1);
+                //if we use 2, then the publisher doesn't publish until the subscriber count reaches 2
+                .publish().refCount(2);
 
 
         movieStream.subscribe(s -> {
